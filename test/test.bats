@@ -103,6 +103,14 @@ function setup() {
     [ $status -eq $expectedExitStatus ]
 }
 
+@test "Check with an existing config file set in INPUT_CONFIG" {
+    # codespell's exit status is 0 if there are no errors found
+    expectedExitStatus=0
+    INPUT_CONFIG="./test/testdata/.setup.cfg"
+    run "./entrypoint.sh"
+    [ $status -eq $expectedExitStatus ]
+}
+
 @test "Use an exclude file" {
     errorCount=$((ROOT_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - EXCLUDED_MISSPELLING_COUNT))
     # codespell's exit status is 0, or 65 if there are errors found
