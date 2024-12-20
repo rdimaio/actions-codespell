@@ -36,6 +36,7 @@ function setup() {
     # Set default input values
     export INPUT_CHECK_FILENAMES=""
     export INPUT_CHECK_HIDDEN=""
+    export INPUT_CONFIG=""
     export INPUT_EXCLUDE_FILE=""
     export INPUT_SKIP=""
     export INPUT_BUILTIN=""
@@ -95,7 +96,8 @@ function setup() {
 }
 
 @test "Check with a non-existent config file set in INPUT_CONFIG" {
-    expectedExitStatus=64
+    # codespell's exit status is 65 if there are errors found
+    expectedExitStatus=65
     INPUT_CONFIG="./foo/bar"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
